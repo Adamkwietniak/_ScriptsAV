@@ -61,7 +61,8 @@ public class WindScript : MonoBehaviour
 			} else if (changeRotation == true) {
 				isTurning = true;
 				targetRotation *= Quaternion.AngleAxis (axisToRotate, Vector3.right); 
-			} else if (changePose == true) {
+			}
+			if (changePose == true) {
 				avGUI.changeStandardPose = true;
 				posController.SetPose ("Slow n hold", 1.0f);
 			}

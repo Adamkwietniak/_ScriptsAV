@@ -99,7 +99,6 @@ public class AviatorController : MonoBehaviour
 
 	void Update ()
 	{
-		
 		if (parachuteIsOpened) {
 			if (parachute.localScale.magnitude < parachuteStrSqale.magnitude) {
 				parachute.localScale *= 1.0f + 5.0f * Time.deltaTime;

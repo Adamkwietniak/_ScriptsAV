@@ -5,14 +5,12 @@ public class TutorialScript : MonoBehaviour
 {
 
 	public GameObject hint;
-	[HideInInspector]public bool SaveFPSBool;
 	MovieDisplayScript mds;
 	[HideInInspector]public bool TurnOnMovie;
 
 	void Start ()
 	{
 		mds = FindObjectOfType<MovieDisplayScript> ();
-		SaveFPSBool = false;
 		TurnOnMovie = false;
 	}
 
@@ -33,7 +31,6 @@ public class TutorialScript : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown (KeyCode.KeypadEnter)) {
 				Time.timeScale = 1;
 				TurnOnMovie = false;
-				SaveFPSBool = true;
 				Destroy (hint, 0.1f);
 				Destroy (this.gameObject, 1.0f);
 

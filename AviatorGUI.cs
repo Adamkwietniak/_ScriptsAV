@@ -28,9 +28,11 @@ public class AviatorGUI : MonoBehaviour
 	private List<string> posesName;
 	[SerializeField]
 	private Gyro gyro;
+	[HideInInspector]public bool changeStandardPose;
 
 	void Awake ()
 	{
+		changeStandardPose = false;
 		doParachuteUp = false;
 		doParachuteDown = false;
 		doParachuteLeft = false;
@@ -99,25 +101,55 @@ public class AviatorGUI : MonoBehaviour
 		if (posControlle.NewPoseName == "T_Pose") {
 			posControlle.SetPose ("Stop n drop", 1.0f);
 			posControlle.UpdateSpeed = 3.0f;
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 3.0f;
+			}
 		} else if (posControlle.NewPoseName == "Salto") {
 			posControlle.SetPose ("From Salto", 1.0f);
 			posControlle.UpdateSpeed = 3.2f;
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 3.0f;
+			}
 		} else if (posControlle.NewPoseName == "From Salto") {
 			posControlle.SetPose ("Stop n drop", 1.0f);//1
 			posControlle.UpdateSpeed = 2.9f;//4
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 3.0f;
+			}
 		} else if (posControlle.NewPoseName == "Rotate left") {
 			posControlle.SetPose ("From Rotate left", 1.0f);
 			posControlle.UpdateSpeed = 3.5f;
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 3.0f;
+			}
 		} else if (posControlle.NewPoseName == "From Rotate left") {
 			posControlle.SetPose ("Stop n drop", 1.0f);
 			posControlle.UpdateSpeed = 3.0f;//4
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 3.0f;
+			}
 		} else if (posControlle.NewPoseName == "Rotate right") {
 			posControlle.SetPose ("From Rotate right", 1.0f);
 			posControlle.UpdateSpeed = 2.5f;//3.5
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 3.0f;
+			}
 		} else if (posControlle.NewPoseName == "From Rotate right") {
 			posControlle.SetPose ("Stop n drop", 1.0f);
 			posControlle.UpdateSpeed = 2.0f;//4.0
-		} 
+
+		}
+		/*if (changeStandardPose == true) {
+			posControlle.SetPose ("Slow n hold", 1.0f);
+			posControlle.UpdateSpeed = 2.0f;
+			Debug.Log ("Jestem!");
+		}*/
 
 	}
 
@@ -253,7 +285,11 @@ public class AviatorGUI : MonoBehaviour
 			posControlle.SetPose ("Open up", -vertical);
 		} else if (inJump) {
 			inJump = false;
-			posControlle.SetPose ("Stop n drop", 1.0f);
+			posControlle.SetPose ("Stop n drop", 3.0f);
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 2.0f;
+			}
 		}
 
 		if (horizontal > 0.0f) {
@@ -267,6 +303,10 @@ public class AviatorGUI : MonoBehaviour
 		} else if (inTurn) {
 			inTurn = false;
 			posControlle.SetPose ("Stop n drop", 1.0f);
+			if (changeStandardPose == true) {
+				posControlle.SetPose ("Slow n hold", 1.0f);
+				posControlle.UpdateSpeed = 2.0f;
+			}
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			posControlle.SetPose ("Salto", 1.0f);
@@ -288,9 +328,9 @@ public class AviatorGUI : MonoBehaviour
 			posControlle.SetPose ("Rotate right", 2.0f);
 		}
 
-		if (Input.GetKeyDown (KeyCode.Z)) {
+		/*if (Input.GetKeyDown (KeyCode.Z)) {
 			posControlle.SetPose ("ParachuteDown", 1.5f);
-		} 
+		} */
 
 		if (Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.UpArrow) && Input.GetKey (KeyCode.LeftArrow)) {
 			doDownAndLeft = true;
@@ -298,7 +338,7 @@ public class AviatorGUI : MonoBehaviour
 			doDownAndLeft = false;
 		}
 		if (doDownAndLeft == true) {
-			posControlle.SetPose ("Down&left", 1.5f);
+			posControlle.SetPose ("Down&left", 2.0f);
 		}
 
 		if (Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.UpArrow) && Input.GetKey (KeyCode.RightArrow)) {
@@ -307,7 +347,7 @@ public class AviatorGUI : MonoBehaviour
 			doDownAndRight = false;
 		}
 		if (doDownAndRight == true) {
-			posControlle.SetPose ("Down&right", 1.5f);
+			posControlle.SetPose ("Down&right", 2.0f);
 		}
 
 		if (Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.DownArrow) && Input.GetKey (KeyCode.RightArrow)) {
@@ -317,7 +357,7 @@ public class AviatorGUI : MonoBehaviour
 		}
 
 		if (doUpAndright == true) {
-			posControlle.SetPose ("Up&right", 1.5f);
+			posControlle.SetPose ("Up&right", 2.0f);
 		}
 
 		if (Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.DownArrow) && Input.GetKey (KeyCode.LeftArrow)) {
@@ -326,7 +366,7 @@ public class AviatorGUI : MonoBehaviour
 			doUpAndLeft = false;
 		}
 		if (doUpAndLeft == true) {
-			posControlle.SetPose ("Up&left", 1.5f);
+			posControlle.SetPose ("Up&left", 2.0f);
 		}
 
 	}

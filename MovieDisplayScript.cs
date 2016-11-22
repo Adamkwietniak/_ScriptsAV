@@ -26,13 +26,11 @@ public class MovieDisplayScript : MonoBehaviour
 	{
 		
 		if (Time.timeScale == 1) {
-			Debug.Log ("Nie działam");
 			movie.Stop ();
 			movie.loop = false;
 			audio.Stop ();
 			movie.Stop ();
 		} else if (Time.timeScale == 0) {
-			Debug.Log ("jestem");
 			audio.clip = movie.audioClip;
 			audio.Play ();
 			movie.Play ();

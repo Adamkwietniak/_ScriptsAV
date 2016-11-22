@@ -181,24 +181,24 @@ public class AviatorController : MonoBehaviour
 		if (posController.NewPoseName == "Stop n drop") {
 			rotationY = 0.0f;
 			velocityY = -3.4f;
-			velocityZ = 10.0f;
+			velocityZ = 5.0f;
 			TimerRecovery ();
 		} else if (posController.NewPoseName == "RightDramatic") {
 			rotationY = 16.0f;
-			velocityY = -2.4f;
+			velocityY = -4.4f;
 			velocityZ = 8.0f;
 			suitFrequency = 150;
 			TimerRecovery ();
 		} else if (posController.NewPoseName == "LeftDramatic") {
 			rotationY = -16.0f;
-			velocityY = -2.4f;
+			velocityY = -4.4f;
 			velocityZ = 8.0f;
 			suitFrequency = 150;
 			TimerRecovery ();
 		} else if (posController.NewPoseName == "Slow n hold") {
 			rotationY = 0.0f;
-			velocityY = -7.0f;
-			velocityZ = 10.0f;
+			velocityY = -3.0f;
+			velocityZ = 12.0f;
 			TimerRecovery ();
 		} else if (posController.NewPoseName == "Energency stop") {
 			rotationY = 0.0f;
@@ -304,14 +304,14 @@ public class AviatorController : MonoBehaviour
 			velocityY = -2.4f;
 			velocityZ = 12.0f;
 			TimerRecovery ();
-			transform.Translate (Vector3.right * 30.0f * Time.deltaTime);
+			transform.Translate (Vector3.right * 55.0f * Time.deltaTime);
 
 		} else if (posController.NewPoseName == "Left turn") {
 			rotationY = -1.0f /** posController.LerpTime*/;
 			velocityY = -2.5f;
 			velocityZ = 7.5f;
 			TimerRecovery ();
-			transform.Translate (Vector3.right * -35.0f * Time.deltaTime);
+			transform.Translate (Vector3.right * -55.0f * Time.deltaTime);
 		} else if (posController.NewPoseName == "From Salto") {
 			velocityY = -12.6f;
 		} else if (posController.NewPoseName == "Salto") {

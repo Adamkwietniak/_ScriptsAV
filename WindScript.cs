@@ -11,7 +11,7 @@ public class WindScript : MonoBehaviour
 	//private AudioSource source;
 	//public AudioClip windSound;
 	//private float randomNumber;
-	public bool wingDirectionUp, wingDirectionRight, wingDirectionOpenUp, changeRotation = false;
+	public bool wingDirectionUp, wingDirectionRight, wingDirectionOpenUp, changeRotation, changePose = false;
 	public Image windWarningImage;
 	private float valueOfAlpha = 0f;
 	private bool upColor = false;
@@ -26,11 +26,15 @@ public class WindScript : MonoBehaviour
 	private Quaternion targetRotation;
 	private bool isTurning = false;
 	public float axisToRotate;
+	AviatorGUI avGUI;
+
+
 
 	void Start ()
 	{
 		//source = GetComponent <AudioSource> ();
 		targetRotation = wingmanTransform.transform.localRotation;
+		avGUI = FindObjectOfType<AviatorGUI> ();
 	}
 
 	void Update ()
@@ -47,12 +51,6 @@ public class WindScript : MonoBehaviour
 		if (other.tag == "Player") {
 			if (wingDirectionUp == true) {
 				wingmanTransform.Rotate (axisToRotate, 0, 0);
-				//rbWingman.AddForce (Vector3.right * hoverForce, ForceMode.Acceleration); // podmuch wiatru
-				//isTurning = true;
-				//targetRotation *= Quaternion.AngleAxis (axisToRotate, Vector3.up);
-				/*if (posController.NewPoseName == "Open up") {
-					controller.velocityY = -1.5f;
-				}*/
 				windWarningImage.enabled = true;
 			} else if (wingDirectionRight == true) {
 				rbWingman.AddForce (Vector3.back * hoverForce, ForceMode.Acceleration);
@@ -63,10 +61,12 @@ public class WindScript : MonoBehaviour
 			} else if (changeRotation == true) {
 				isTurning = true;
 				targetRotation *= Quaternion.AngleAxis (axisToRotate, Vector3.right); 
+			} else if (changePose == true) {
+				avGUI.changeStandardPose = true;
+				posController.SetPose ("Slow n hold", 1.0f);
 			}
 
 			//source.PlayOneShot (windSound);
-
 
 		}
 	}

@@ -18,10 +18,12 @@ public class CameraWithShakeScript : MonoBehaviour
 
 	private int layerMaskPlayer = ~(1 << 9);
 	public GameObject camTwo;
+	AviatorController controller;
 
 
 	void Start ()
 	{
+		controller = FindObjectOfType<AviatorController> ();
 		ry = objectToFollow.transform.rotation.eulerAngles.y;
 		cameraParent.transform.position = objectToFollow.transform.position;
 
@@ -33,6 +35,10 @@ public class CameraWithShakeScript : MonoBehaviour
 		//CameraControlXYAxis ();
 		CameraControlZAxis ();
 		CameraRotation ();
+
+		if (controller.parachuteIsOpened == true) {
+			maxDistance = 15.0f;
+		}
 	}
 
 	/*void CameraControlXYAxis ()

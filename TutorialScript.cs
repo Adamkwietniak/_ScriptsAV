@@ -6,18 +6,18 @@ public class TutorialScript : MonoBehaviour
 
 	public GameObject hint;
 	MovieDisplayScript mds;
-	[HideInInspector]public bool TurnOnMovie;
+	[HideInInspector]public bool turnedClip;
 
 	void Start ()
 	{
 		mds = FindObjectOfType<MovieDisplayScript> ();
-		TurnOnMovie = false;
+		turnedClip = false;
 	}
 
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.tag == "Player") {
-			TurnOnMovie = true;
+			turnedClip = true;
 			hint.SetActive (true);
 			Time.timeScale = 0;
 		}
@@ -26,11 +26,16 @@ public class TutorialScript : MonoBehaviour
 
 	void Update ()
 	{
+		if (Time.timeScale == 0) {
+			mds.TurnOnMovie = true;
+		} else if (Time.timeScale == 1) {
+			mds.TurnOnMovie = false;
+		}
 
-		if (TurnOnMovie == true) {
+		if (turnedClip == true) {
 			if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown (KeyCode.KeypadEnter)) {
 				Time.timeScale = 1;
-				TurnOnMovie = false;
+				turnedClip = false;
 				Destroy (hint, 0.1f);
 				Destroy (this.gameObject, 1.0f);
 

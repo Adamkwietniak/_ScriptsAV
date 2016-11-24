@@ -7,29 +7,28 @@ public class RingManagerScript : MonoBehaviour
 
 	private Transform transformRing;
 	public static Transform neckPoint;
-
-
 	private float force = 100000.0f;
 	private float radius = 5.0f;
 	[HideInInspector]public float upwardsModifer = 0.0f;
 	public ForceMode forceMode;
 	[HideInInspector]public Rigidbody[] spheresRb;
-
 	public Text commentText;
 	// używany w "Perfect!"
-
 	private GameObject Aviator;
 	MissionManagerScript missionManager;
-	//private Animator anim;
+	private float distance;
+	public LineRenderer lineRendererObject;
+	private Color defaultColor = Color.green;
+	private Color newColor = Color.red;
+
+
 
 	// Use this for initialization
 	void Awake ()
 	{
 		Aviator = GameObject.Find ("WingsuitAviator");
-		//Aviator = GetComponent<Transform> ();
 		spheresRb = GetComponentsInChildren<Rigidbody> ();
 		missionManager = FindObjectOfType<MissionManagerScript> ();
-		//anim = GetComponent<Animator> ();
 		if (neckPoint == null) {
 			neckPoint = GameObject.FindGameObjectWithTag ("Player").transform.FindChild ("Root/Ribs/Chest/Neck/Neck/Head");
 		}
@@ -38,25 +37,21 @@ public class RingManagerScript : MonoBehaviour
 	void Start ()
 	{
 		transformRing = GetComponent<Transform> ();
-		//anim.enabled = false;
-
+		distance = Vector3.Distance (neckPoint.position, transformRing.position);
 	}
 
-	/*void EnableAnimation ()
-	{
-		float dist = Vector3.Distance (Aviator.transform.position, this.transform.position);
-		if (dist < 5) {
-			anim.enabled = true;
-		}
-	}*/
-
-	// Update is called once per frame
 	void Update ()
 	{
 		//transformRing.transform.Rotate (Vector3.left * Time.deltaTime * 80);
-		//EnableAnimation ();
 		if (commentText.enabled == true) {
-			StartCoroutine (ResetCommentText (0.5f));
+			StartCoroutine (ResetCommentText (0.3f));
+		}
+
+		if (distance < 5) {
+			lineRendererObject.material = new Material (Shader.Find ("Particles/Alpha Blended"));
+			lineRendererObject.SetColors (defaultColor, newColor);
+			//lineRendererObject = Color.Lerp (Color.green, Color.red, Mathf.PingPong (Time.time, 1));
+			Debug.Log ("1");	
 		}
 
 	}
@@ -70,8 +65,6 @@ public class RingManagerScript : MonoBehaviour
 			foreach (Rigidbody rb in spheresRb) {
 				rb.AddExplosionForce (force, transform.position, radius, upwardsModifer, forceMode);
 			}
-
-			float distance = Vector3.Distance (neckPoint.position, transformRing.position);
 
 			if (distance < 2.5 && distance > 0) {
 				commentText.enabled = true;

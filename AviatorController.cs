@@ -55,9 +55,12 @@ public class AviatorController : MonoBehaviour
 	private Vector3 parachuteStrSqale;
 	private bool isMobilePlatform;
 
+	AviatorGUI avGUI;
+
 
 	public void OnAwake ()
 	{
+		avGUI = FindObjectOfType<AviatorGUI> ();
 		ws = FindObjectOfType <WindScript> ();
 		motionBlur = FindObjectOfType<MotionBlur> ();
 		parachuteStrSqale = parachute.localScale;
@@ -206,7 +209,7 @@ public class AviatorController : MonoBehaviour
 			TimerRecovery ();
 		} else if (posController.NewPoseName == "Open up") {
 			rotationY = 0.0f;
-			velocityY = -3.0f;
+			velocityY = -4.0f;
 			velocityZ = 9.0f;
 			timerToOpenUp -= Time.deltaTime;
 			while (true) {
@@ -220,6 +223,9 @@ public class AviatorController : MonoBehaviour
 				}
 
 				break;
+			}
+			if (avGUI.changeStandardPose == true) {
+				velocityZ = 11.0f;
 			}
 
 		} else if (posController.NewPoseName == "Down&right") {
@@ -303,14 +309,19 @@ public class AviatorController : MonoBehaviour
 			velocityY = -2.4f;
 			velocityZ = 12.0f;
 			TimerRecovery ();
-			transform.Translate (Vector3.right * 55.0f * Time.deltaTime);
-
+			transform.Translate (Vector3.right * 45.0f * Time.deltaTime);
+			if (avGUI.changeStandardPose == false) {
+				velocityZ = 4.0f;
+			}
 		} else if (posController.NewPoseName == "Left turn") {
 			rotationY = -1.0f /** posController.LerpTime*/;
 			velocityY = -2.5f;
 			velocityZ = 7.5f;
 			TimerRecovery ();
-			transform.Translate (Vector3.right * -55.0f * Time.deltaTime);
+			transform.Translate (Vector3.right * -45.0f * Time.deltaTime);
+			if (avGUI.changeStandardPose == false) {
+				velocityZ = 4.0f;
+			}
 		} else if (posController.NewPoseName == "From Salto") {
 			velocityY = -12.6f;
 		} else if (posController.NewPoseName == "Salto") {

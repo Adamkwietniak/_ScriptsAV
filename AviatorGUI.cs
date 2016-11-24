@@ -282,13 +282,15 @@ public class AviatorGUI : MonoBehaviour
 			posControlle.SetPose ("Squeeze", vertical);
 		} else if (vertical < 0.0f) {
 			inJump = true;
+			posControlle.UpdateSpeed = 3.3f;
 			posControlle.SetPose ("Open up", -vertical);
 		} else if (inJump) {
 			inJump = false;
+			posControlle.UpdateSpeed = 3.3f;
 			posControlle.SetPose ("Stop n drop", 3.0f);
 			if (changeStandardPose == true) {
 				posControlle.SetPose ("Slow n hold", 1.0f);
-				posControlle.UpdateSpeed = 2.0f;
+				posControlle.UpdateSpeed = 3.0f;
 			}
 		}
 

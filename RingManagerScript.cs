@@ -38,21 +38,22 @@ public class RingManagerScript : MonoBehaviour
 	{
 		transformRing = GetComponent<Transform> ();
 		distance = Vector3.Distance (neckPoint.position, transformRing.position);
+
 	}
 
 	void Update ()
 	{
+		//Debug.Log (distance);
 		//transformRing.transform.Rotate (Vector3.left * Time.deltaTime * 80);
 		if (commentText.enabled == true) {
 			StartCoroutine (ResetCommentText (0.3f));
-		}
-
-		if (distance < 5) {
+		}	
+		/*if (distance < 400) {	
 			lineRendererObject.material = new Material (Shader.Find ("Particles/Alpha Blended"));
 			lineRendererObject.SetColors (defaultColor, newColor);
 			//lineRendererObject = Color.Lerp (Color.green, Color.red, Mathf.PingPong (Time.time, 1));
-			Debug.Log ("1");	
-		}
+
+		}*/
 
 	}
 

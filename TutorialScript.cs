@@ -26,11 +26,7 @@ public class TutorialScript : MonoBehaviour
 
 	void Update ()
 	{
-		if (Time.timeScale == 0) {
-			mds.TurnOnMovie = true;
-		} else if (Time.timeScale == 1) {
-			mds.TurnOnMovie = false;
-		}
+
 
 		if (turnedClip == true) {
 			if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown (KeyCode.KeypadEnter)) {

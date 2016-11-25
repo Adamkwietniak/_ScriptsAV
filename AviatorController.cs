@@ -200,7 +200,7 @@ public class AviatorController : MonoBehaviour
 		} else if (posController.NewPoseName == "Slow n hold") {
 			rotationY = 0.0f;
 			velocityY = -3.0f;
-			velocityZ = 12.0f;
+			velocityZ = 10.0f;
 			TimerRecovery ();
 		} else if (posController.NewPoseName == "Energency stop") {
 			rotationY = 0.0f;
@@ -233,12 +233,18 @@ public class AviatorController : MonoBehaviour
 			velocityY = -8.0f;
 			velocityZ = 10.0f;
 			TimerRecovery ();
+			if (avGUI.changeStandardPose == false) {
+				velocityZ = 4.0f;
+			}
 			transform.Translate (Vector3.right * 38.0f * Time.deltaTime);
 		} else if (posController.NewPoseName == "Down&left") {
 			rotationY = 0.0f;
 			velocityY = -8.0f;
 			velocityZ = 10.0f;
 			TimerRecovery ();
+			if (avGUI.changeStandardPose == false) {
+				velocityZ = 4.0f;
+			}
 			transform.Translate (Vector3.right * -38.0f * Time.deltaTime);
 		} else if (posController.NewPoseName == "Up&right") {
 			rotationY = 0.0f /** posController.LerpTime*/;
@@ -258,13 +264,16 @@ public class AviatorController : MonoBehaviour
 
 				break;
 			}
-	
+			if (avGUI.changeStandardPose == false) {
+				velocityZ = 4.0f;
+			}
 		} else if (posController.NewPoseName == "Up&left") {
 			rotationY = 0.0f /** posController.LerpTime*/;
 			velocityY = -2.4f;
 			velocityZ = 10.0f;
 			timerToOpenUp -= Time.deltaTime;
 			transform.Translate (Vector3.right * -38.0f * Time.deltaTime);
+
 			while (true) {
 				if (timerToOpenUp < 0) {
 					timerToOpenUp = 8;
@@ -277,7 +286,9 @@ public class AviatorController : MonoBehaviour
 
 				break;
 			}
-
+			if (avGUI.changeStandardPose == false) {
+				velocityZ = 4.0f;
+			}
 
 		} else if (posController.NewPoseName == "Squeeze") {
 			rotationY = 0.0f;
@@ -307,7 +318,7 @@ public class AviatorController : MonoBehaviour
 		} else if (posController.NewPoseName == "Right turn") {
 			rotationY = 1.0f /** posController.LerpTime*/;
 			velocityY = -2.4f;
-			velocityZ = 12.0f;
+			velocityZ = 10.0f;
 			TimerRecovery ();
 			transform.Translate (Vector3.right * 45.0f * Time.deltaTime);
 			if (avGUI.changeStandardPose == false) {
@@ -316,7 +327,7 @@ public class AviatorController : MonoBehaviour
 		} else if (posController.NewPoseName == "Left turn") {
 			rotationY = -1.0f /** posController.LerpTime*/;
 			velocityY = -2.5f;
-			velocityZ = 7.5f;
+			velocityZ = 10.0f;
 			TimerRecovery ();
 			transform.Translate (Vector3.right * -45.0f * Time.deltaTime);
 			if (avGUI.changeStandardPose == false) {

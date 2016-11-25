@@ -45,7 +45,7 @@ public class JointsPoseController : MonoBehaviour
 
 	void Update ()
 	{
-		Debug.Log (NewPoseName);
+		//Debug.Log (NewPoseName);
 		if (currentPose == null || newPose == null) {
 			return;
 		}
